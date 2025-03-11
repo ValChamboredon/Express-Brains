@@ -8,25 +8,14 @@
     rel="stylesheet">
 
 </head>
-<body class="bg-light text-center">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="#">Express Brain</a>
+<body class="bg-light text-center d-flex flex-column min-vh-100">
 
-            <div class="collapse navbar-collapse" id="navbarNav">
+    <%- include("fragments/header") %>
 
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item"><a class="nav-link text-white" href="#">Jouer</a></li>
-                    <li class="nav-item"><a class="nav-link text-white" href="#">Classement</a></li>
-                    <li class="nav-item"><a class="nav-link text-white" href="#">Équipes</a></li>
-                </ul>
-                <a class="btn btn-light" href="#">Connexion <i class="bi bi-person"></i></a>
-            </div>
-        </div>
-    </nav>
-    <div class="container mt-5">
+    <div class="container flex-grow-1 mt-5">
         <h1 class="text-primary">Express Brains</h1>
         <p class="lead">Découvrez en un minimum de tours le nombre caché derrière la carte mystère !</p>
+
         <div class="card shadow p-4 mt-3">
             <h2 class="fw-bold mt-3">Qui suis-je ?</h2>
             <p>Quel nombre se cache derrière cette carte mystère ?</p>
@@ -50,11 +39,10 @@
                 </form>
             <% } %>
         </div>
-
     </div>
+    <p><%= secretNumber %></p>
+    <%- include("fragments/footer") %>
 
-    <p>debug secretNumber = <%= secretNumber %></p>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
 </html>
