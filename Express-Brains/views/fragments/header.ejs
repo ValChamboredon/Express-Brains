@@ -1,13 +1,21 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container">
-        <a class="navbar-brand fw-bold" href="/">Express Brain</a>
+        <h2 class="navbar-brand fw-bold">Express Brains</h2>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto">
-                <li class="nav-item"><a class="nav-link text-white" href="#">Jouer</a></li>
-                <li class="nav-item"><a class="nav-link text-white" href="#">Classement</a></li>
-                <li class="nav-item"><a class="nav-link text-white" href="#">Équipes</a></li>
+                <li class="nav-item"><a class="nav-link text-white" href="/">Jouer</a></li>
+                <li class="nav-item"><a class="nav-link text-white" href="/classement">Classement</a></li>
+                <li class="nav-item"><a class="nav-link text-white" href="/teams">Équipes</a></li>
+                <% if (user && user.role === 'admin') { %>
+                    <li class="nav-item"><a class="nav-link text-white" href="/admin">Admin</a></li>
+                <% } %>
             </ul>
+            <% if (user) { %>
+                <span class="navbar-text text-white me-3">Bienvenue <%=user.email%></span>
+                <a class="btn btn-light" href="/logout">Déconnexion <i class="bi bi-box-arrow-right"></i></a>
+            <% } else { %>
             <a class="btn btn-light" href="/login">Connexion <i class="bi bi-person"></i></a>
+            <% } %>
         </div>
     </div>
 </nav>

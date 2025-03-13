@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Équipes</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <%- include("fragments/header") %>
+    <div class="container mt-5">
+        <h1 class="text-primary">Équipes</h1>
+
+        <!-- Formulaire de création d'équipe -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Créer une équipe</h5>
+                <form action="/teams" method="POST">
+                    <div class="mb-3">
+                        <input type="text" class="form-control" name="name" placeholder="Nom de l'équipe" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Créer</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Liste des équipes -->
+        <div class="row">
+            <% teams.forEach(team => { %>
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= team.name %></h5>
+                            <p class="card-text">Score: <%= team.score %></p>
+                            <h6>Membres:</h6>
+                            <ul class="list-unstyled">
+                                <% team.members.forEach(member => { %>
+                                    <li><%= member.username %></li>
+                                <% }) %>
+                            </ul>
+                            
+                            <% if (!user.team) { %>
+                                <form action="/teams/join" method="POST">
+                                    <input type="hidden" name="teamId" value="<%= team._id %>">
+                                    <button type="submit" class="btn btn-success">Rejoindre</button>
+                                </form>
+                            <% } else if (user.team.equals(team._id)) { %>
+                                <form action="/teams/leave" method="POST">
+                                    <button type="submit" class="btn btn-danger">Quitter</button>
+                                </form>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+</body>
+</html>
